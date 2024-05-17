@@ -38,7 +38,8 @@ function App() {
     'dumbbell_tricep_extension.glb',
     'dumbbell_shoulder_press.glb',
     'dumbbell_fly.glb',
-    'dumbbelcurl.glb'
+    'dumbbelcurl.glb',
+    'dumbbell_tricep_extension_c.glb',
   ];
 
   return (
