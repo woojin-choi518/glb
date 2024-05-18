@@ -28,12 +28,12 @@ const Model = ({ modelPath }) => {
 };
 
 function App() {
-  const [modelPath, setModelPath] = useState('/squat.glb');
+  const [modelPath, setModelPath] = useState('/dumbbelcurl.glb');
   const exercises = [
     'squat.glb',
     'sit_up.glb',
     'side_lateral_raise.glb',
-    'pushup.glb',
+    'push_up.glb',
     'leg_raise.glb',
     'dumbbell_tricep_extension.glb',
     'dumbbell_shoulder_press.glb',
