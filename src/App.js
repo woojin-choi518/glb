@@ -28,19 +28,24 @@ const Model = ({ modelPath }) => {
 };
 
 function App() {
-  const [modelPath, setModelPath] = useState('/dumbbelcurl.glb');
-  const exercises = [
-    'squat.glb',
-    'sit_up.glb',
-    'side_lateral_raise.glb',
-    'push_up.glb',
-    'leg_raise.glb',
-    'dumbbell_tricep_extension.glb',
-    'dumbbell_shoulder_press.glb',
-    'dumbbell_fly.glb',
-    'dumbbelcurl.glb',
-    'dumbbell_tricep_extension_c.glb',
-  ];
+  const getModelPathFromUrl = () => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('model') || '/dumbbelcurl.glb';
+  };
+
+  const [modelPath, setModelPath] = useState(getModelPathFromUrl());
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setModelPath(getModelPathFromUrl());
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
@@ -52,13 +57,6 @@ function App() {
           <OrbitControls />
         </Suspense>
       </Canvas>
-      <div style={{ position: 'absolute', top: 0, width: '100%', display: 'flex', justifyContent: 'center' }}>
-        {exercises.map(exercise => (
-          <button key={exercise} style={{ margin: '10px' }} onClick={() => setModelPath(`/${exercise}`)}>
-            {exercise.replace('.glb', '').replace('_', ' ')}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
