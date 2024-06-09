@@ -28,24 +28,8 @@ const Model = ({ modelPath }) => {
 };
 
 function App() {
-  const getModelPathFromUrl = () => {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('model') || '/dumbbelcurl.glb';
-  };
-
-  const [modelPath, setModelPath] = useState(getModelPathFromUrl());
-
-  useEffect(() => {
-    const handlePopState = () => {
-      setModelPath(getModelPathFromUrl());
-    };
-
-    window.addEventListener('popstate', handlePopState);
-
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, []);
+  const urlParams = new URLSearchParams(window.location.search);
+  const modelPath = urlParams.get('model') || '/dumbbelcurl.glb';
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
