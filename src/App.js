@@ -28,18 +28,8 @@ const Model = ({ modelPath }) => {
 };
 
 function App() {
-  const [modelPath, setModelPath] = useState('/squat.glb');
-  const exercises = [
-    'squat.glb',
-    'sit_up.glb',
-    'side_lateral_raise.glb',
-    'pushup.glb',
-    'leg_raise.glb',
-    'dumbbell_tricep_extension.glb',
-    'dumbbell_shoulder_press.glb',
-    'dumbbell_fly.glb',
-    'dumbbelcurl.glb'
-  ];
+  const urlParams = new URLSearchParams(window.location.search);
+  const modelPath = urlParams.get('model') || '/dumbbelcurl.glb';
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
@@ -51,13 +41,6 @@ function App() {
           <OrbitControls />
         </Suspense>
       </Canvas>
-      <div style={{ position: 'absolute', top: 0, width: '100%', display: 'flex', justifyContent: 'center' }}>
-        {exercises.map(exercise => (
-          <button key={exercise} style={{ margin: '10px' }} onClick={() => setModelPath(`/${exercise}`)}>
-            {exercise.replace('.glb', '').replace('_', ' ')}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
