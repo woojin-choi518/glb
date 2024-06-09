@@ -29,6 +29,7 @@ const Model = ({ modelPath }) => {
 
 function App() {
   const urlParams = new URLSearchParams(window.location.search);
+  console.log(urlParams)
   const modelPath = urlParams.get('model') || '/dumbbelcurl.glb';
 
   return (
